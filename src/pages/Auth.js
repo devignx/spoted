@@ -23,7 +23,7 @@ const Auth = () => {
         setLoad(true)
         const socket = openConnection();
         socket.then((sock) => {
-            axios.get("https://ipinfo.io/json?token=038d5fc9f2ff38")
+            axios.get("https://api.ipify.org/?format=json")
             .then(res => {
                 if(res.status === 200){
                     setSuc(true)
@@ -31,7 +31,6 @@ const Auth = () => {
                         setLoad(false)
                     }, 3000)
                     const arr = res.data.ip.split('.')
-                    console.log(res.data.ip.split('.'))
                     setIp(`${arr[0]}.${arr[1]}.${arr[2]}`)
                     setSocket(sock)
                 }
