@@ -62,10 +62,11 @@ const Auth = () => {
             <Link to="/settings"><div className="absolute top-10 right-10 h-10 w-10 flex items-center justify-center shadow-lg rounded-lg">
                 <FiSettings/>
             </div></Link>
-            <div className="w-3/4 lg:w-2/4 h-1/4 shadow-lg backhue rounded-lg">
-                <form className="w-full h-full flex items-center flex-col justify-evenly">
-                    <input value={na} onChange={(event)=> setNa(event.target.value)} type="text" className="w-3/4 p-2 border border-gray-200 text-black rounded-lg outline-0" placeholder="Enter your username"/>
-                    <button disabled={load} onClick={handleSubmit} className="bg-blue-500 w-3/4 py-2 rounded-lg">Enter</button>
+            <div className="w-11/12 lg:w-1/3 h-1/2 shadow-xl backhue rounded-2xl">
+                <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
+                    <input value={na} onChange={(event)=> setNa(event.target.value)} type="text" className="w-3/4 p-4 text-lg border border-gray-200 text-black rounded-lg outline-0" placeholder="Enter your username"/>
+                    <button disabled={load} onClick={handleSubmit} className="bg-blue-500 w-3/4 py-4 text-white text-lg rounded-lg">Enter</button>
+                    <Link to='/chat' className="opacity-40">1 of 1</Link>
                 </form>
             </div>
             {

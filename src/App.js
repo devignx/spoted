@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import useStore from './store/store';
 import { GlobalStyles, darkTheme, lightTheme } from './Theme';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Chat from './pages/Chat';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/' element={<Auth/>}/>
           <Route path='/settings' element={<Settings/>}/>
           <Route path='/room' element={<Room/>}/>
+          <Route path='/chat' element={<Chat/>}/>
         </Routes>
       </Router>
     </ThemeProvider>

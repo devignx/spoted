@@ -3,15 +3,15 @@ import { createGlobalStyle } from "styled-components"
 export const lightTheme =  {
     background: '#fff',
     text: '#000',
-    hue: '#d7d8d9',
+    hue: '#fff',
     load: '#14171c',
     loadCol: '#f1f5f9',
 }
 
 export const darkTheme = {
-    background: '#000',
+    background: 'rgba(38, 36, 45)',
     text: '#fff',
-    hue: '#2e2e2e',
+    hue: '#0d0d0d',
     load: '#f1f5f9',
     loadCol: '#363537',
 }
