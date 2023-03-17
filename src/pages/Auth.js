@@ -38,6 +38,10 @@ const Auth = () => {
                     setError(true)
                 }
             })
+            .catch(()=> {
+                setLoad(false)
+                setError(true)
+            })
         })
         .catch(()=> {
             setLoad(false)
@@ -55,6 +59,9 @@ const Auth = () => {
         if(socket === null){
             establishConnection();
         }
+        else{
+            navigate('/room')
+        }
     }, [])
 
     return(
@@ -66,7 +73,6 @@ const Auth = () => {
                 <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
                     <input value={na} onChange={(event)=> setNa(event.target.value)} type="text" className="w-3/4 p-4 text-lg border border-gray-200 text-black rounded-lg outline-0" placeholder="Enter your username"/>
                     <button disabled={load} onClick={handleSubmit} className="bg-blue-500 w-3/4 py-4 text-white text-lg rounded-lg">Enter</button>
-                    <Link to='/chat' className="opacity-40">1 of 1</Link>
                 </form>
             </div>
             {

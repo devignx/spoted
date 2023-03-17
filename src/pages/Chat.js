@@ -1,11 +1,55 @@
 import { Link } from "react-router-dom";
 import '../styles/Globals.css';
 import useStore from "../store/store";
-
+import { useNavigate } from "react-router-dom";
 import { AiOutlineSend, AiOutlineHome } from 'react-icons/ai';
 import { BsPeople } from 'react-icons/bs';
+import { useEffect, useState } from "react";
+import Home from "../components/Hm";
+import Away from "../components/Am";
 
 const Chat = () => {
+    const navigate = useNavigate();
+    const { socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages}))
+
+    const [arrmsg, setArrmsg] = useState(messages)
+    const [mess, setMess] = useState("")
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const msg= {
+            type: "message",
+            from: "hm",
+            message: mess
+        }
+        setArrmsg([...arrmsg, msg])
+        setMessages(arrmsg)
+        socket.send(JSON.stringify({
+            type: "message",
+            from: "am",
+            name: name,
+            message: mess
+        }))
+        setMess("")
+    }
+
+    useEffect(()=> {
+        if(socket === null){
+            navigate('/');
+        }
+
+        socket.onmessage = (data) => {
+            const response = JSON.parse(data.data)
+            if(response.type === "peerlist"){
+                setPeers([...response.peers])
+            }
+            if(response.type === "message"){
+                setArrmsg([...arrmsg, response])
+                setMessages(arrmsg)
+                console.log(messages)
+            }
+        }
+    }, [])
 
     return(
         <div className="">
@@ -19,32 +63,17 @@ const Chat = () => {
                 <div className="w-full lg:w-[50%] h-full backhue shadow-xl p-3 h-full  m-auto overflow-y-scroll">
                     <div className="w-full h-10/12">
                         <div className="flex relative flex-col mb-[6rem]">
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <p className="bg-white/10 text-lg shadow-md p-3 w-fit my-2 rounded-full max-w-1/2 rounded-bl-none px-4">Recieved</p>
-                            <p className="bg-blue-500 text-white shadow-md mr-0 m-auto text-lg p-3 w-fit my-2 rounded-full max-w-1/2 rounded-br-none px-4">Sent</p>
-                            <div className="fixed w-full  backdrop-blur-xl lg:w-1/2 -ml-3 bottom-0 h-[5rem] lg:h-[7rem] ">
-                                <br></br>
-                            </div>
+                            {
+
+                                arrmsg.map((message, index) => 
+                                    message.from === "am"?<Away key={index} message={message.message} sender={message.name}/>
+                                :
+                                    <Home key={index} message={message.message}/>    
+                                )
+                            }
                         </div>
-                        <form className='relative m-auto'>
-                            <input className='outline-none bg-black/[.05] drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' type="text" placeholder='Ask here'></input>
+                        <form className='relative m-auto' onSubmit={handleSubmit}>
+                            <input onChange={(event)=> setMess(event.target.value)} value={mess} className='outline-none bg-black/[.05] drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' type="text" placeholder='Ask here'></input>
                             <AiOutlineSend className="fixed bottom-[2.5rem] lg:bottom-[2.7rem] right-[10%] lg:right-[28%] scale-[150%]"/> 
                         </form>
                     </div>

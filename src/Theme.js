@@ -11,7 +11,7 @@ export const lightTheme =  {
 export const darkTheme = {
     background: 'rgba(38, 36, 45)',
     text: '#fff',
-    hue: '#0d0d0d',
+    hue: '#0d0d0d50',
     load: '#f1f5f9',
     loadCol: '#363537',
 }
