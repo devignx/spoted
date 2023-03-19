@@ -9,7 +9,7 @@ const Room = () => {
 
     const navigate = useNavigate();
 
-    const { socket, name, ip, setPeers, peers, loged, setLoged } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged}))
+    const { socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages}))
 
     useEffect(()=> {
         if(socket === null){
@@ -22,15 +22,19 @@ const Room = () => {
                 ip: ip
             }
             socket.send(JSON.stringify(payload))
-            socket.onmessage = (data) => {
-                const response = JSON.parse(data.data)
-                if(response.type === "peerlist"){
-                    setPeers([...response.peers])
-                }
-            }
             setLoged(true)
         }
     },[])
+
+    socket.onmessage = (data) => {
+        const response = JSON.parse(data.data)
+        if(response.type === "peerlist"){
+            setPeers([...response.peers])
+        }
+        if(response.type === "message"){
+            setMessages([...messages, response])
+        }
+    }
 
     return(
         <div className="relative w-full h-screen">

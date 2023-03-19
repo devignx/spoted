@@ -22,8 +22,7 @@ const Chat = () => {
             from: "hm",
             message: mess
         }
-        setArrmsg([...arrmsg, msg])
-        setMessages(arrmsg)
+        setMessages([...messages, msg])
         socket.send(JSON.stringify({
             type: "message",
             from: "am",
@@ -33,21 +32,22 @@ const Chat = () => {
         setMess("")
     }
 
+    socket.onmessage = (data) => {
+        const response = JSON.parse(data.data)
+        if(response.type === "peerlist"){
+            setPeers([...response.peers])
+        }
+        if(response.type === "message"){
+            setMessages([...messages, response])
+            console.log(response)
+            console.log('i am running')
+            console.log(messages)
+        }
+    }
+
     useEffect(()=> {
         if(socket === null){
             navigate('/');
-        }
-
-        socket.onmessage = (data) => {
-            const response = JSON.parse(data.data)
-            if(response.type === "peerlist"){
-                setPeers([...response.peers])
-            }
-            if(response.type === "message"){
-                setArrmsg([...arrmsg, response])
-                setMessages(arrmsg)
-                console.log(messages)
-            }
         }
     }, [])
 
@@ -65,7 +65,7 @@ const Chat = () => {
                         <div className="flex relative flex-col mb-[6rem]">
                             {
 
-                                arrmsg.map((message, index) => 
+                                messages.map((message, index) => 
                                     message.from === "am"?<Away key={index} message={message.message} sender={message.name}/>
                                 :
                                     <Home key={index} message={message.message}/>    
