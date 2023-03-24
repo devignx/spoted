@@ -38,34 +38,35 @@ const Room = () => {
 
     return(
         <div className="relative w-full h-screen">
-            <div className="w-full h-1/6 flex items-center justify-center gap-8">
-                <h1 className="text-xl font-bold">{name}</h1>
-                <h1 className="text-xl font-bold text-blue-500">{ip}</h1>
+            <div className="justify-center flex backhue items-center">
+                <div className="w-full p-6 flex  items-center justify-center gap-4">
+                    <h1 className="text-xl font-bold">{name}</h1>
+                    <h1 className="text-xl font-bold text-blue-500">{ip}</h1>
+                </div>
+                <Link to='/settings' className="p-4 right-6 md:right-12 m-auto absolute"><FiSettings size='20px'/></Link>
             </div>
+            <Link to='/chat' className="mt-6 rounded-lg m-auto top-12 right-24 text-white w-11/12 md:w-fit p-4 px-6 bg-blue-500 flex items-center justify-center gap-3">
+                <BsChat size={'20px'}/>
+                <h1>Live Chat</h1>
+            </Link>
             <div className="w-full h-5/6 flex items-center justify-center">
-                <div className="w-3/4 h-5/6 backhue rounded-lg p-2 overflow-scroll overflow-x-hidden">
+                <div className="w-full md:w-1/2 h-5/6 backhue rounded-lg p-4 overflow-scroll overflow-x-hidden">
                     {
-                        peers.map((peer, index)=> <div key={index} className="w-full h-40 mb-4">
-                            <div className="w-full h-4/6 bg-blue-500 rounded-lg mb-2 flex flex-col items-center justify-center gap-4">
-                                <BsPerson size={"30px"}/> 
-                                <h1>{peer.name}</h1>
+                        peers.map((peer, index)=> <div key={index} className="w-full mb-4">
+                            <div className=" m-auto px-6 md:px-12 p-6 bg-blue-500/20 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
+                                <div className="flex gap-3 items-center ">
+                                    <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
+                                    <h1>{peer.name}</h1>
+                                </div>
+                                <div className=" text-white cursor-pointer p-3 px-5 bg-blue-500 rounded-lg flex items-center justify-center">
+                                    <h1>Connect</h1>
+                                </div>
                             </div>
-                            <div className="w-full h-2/6 bg-blue-500 rounded-lg flex items-center justify-center">
-                                <h1>Connect</h1>
-                            </div>
+                            
                         </div>)
                     }
                 </div>
             </div>
-            <Link to="/chat"><div className="absolute rounded-lg top-4 right-4 w-1/6 h-16 bg-blue-500 flex items-center justify-center gap-6">
-                <BsChat size={'30px'}/>
-                <h1>Live Chat</h1>
-            </div></Link>
-            <Link to="/settings">
-                <div className="absolute rounded-lg bottom-4 right-4 h-10 w-10 flex items-center justify-center shadow-lg">
-                    <FiSettings/>
-                </div>
-            </Link>
         </div>
     )
 }
