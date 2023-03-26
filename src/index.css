@@ -25,3 +25,26 @@
     background-color: #d8d8d8;
     z-index: 150;
   }
+
+  
+.pc{
+  visibility: visible;
+  display: flex;
+}
+
+.mob{
+  visibility: hidden;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+
+  .mob{
+  visibility: visible;
+  display:flex;
+  }
+  .pc{
+  visibility: hidden;
+  display: none;
+  }
+}

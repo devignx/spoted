@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/store";
 import { BsPerson, BsChat } from "react-icons/bs";
 import { FiSettings } from 'react-icons/fi';
 import { Link } from "react-router-dom";
+import logo from '../assets/spotlogo.svg'   
+import { BsSun, BsMoon } from 'react-icons/bs'
 
 const Room = () => {
 
     const navigate = useNavigate();
+    const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
     const { socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages}))
 
@@ -40,10 +43,19 @@ const Room = () => {
         <div className="relative w-full h-screen">
             <div className="justify-center flex backhue items-center">
                 <div className="w-full p-6 flex  items-center justify-center gap-4">
+                <img className="w-[6rem] absolute left-4 top-0 pc mix-blend-difference" src={logo} />
                     <h1 className="text-xl font-bold">{name}</h1>
                     <h1 className="text-xl font-bold text-blue-500">{ip}</h1>
                 </div>
                 <Link to='/settings' className="p-4 right-6 md:right-12 m-auto absolute"><FiSettings size='20px'/></Link>
+                <div onClick={changeTheme} className="h-12 w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
+                        {
+                            theme === "light"?
+                                <BsMoon/>
+                            :
+                                <BsSun/>
+                        }
+                </div>
             </div>
             <Link to='/chat' className="mt-6 rounded-lg m-auto top-12 right-24 text-white w-11/12 md:w-fit p-4 px-6 bg-blue-500 flex items-center justify-center gap-3">
                 <BsChat size={'20px'}/>

@@ -7,14 +7,18 @@ import { Link, useNavigate } from "react-router-dom";
 import openConnection from "../websocket";
 import axios from "axios";
 import useStore from "../store/store";
+import logo from '../assets/spotlogo.svg'
+import { BsSun, BsMoon } from 'react-icons/bs'
 
 const Auth = () => {
 
+    
     const [error, setError] = useState(false)
     const [load, setLoad] = useState(false)
     const [na, setNa] = useState("")
     const [suc, setSuc] = useState(false)
     const navigate = useNavigate()
+    const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
     const { setSocket, socket, setIp, setName } = useStore((state) => ({setSocket: state.setSocket, socket: state.socket, ip: state.ip, setIp: state.setIp, setName: state.setName}))
 
@@ -62,13 +66,25 @@ const Auth = () => {
         else{
             navigate('/room')
         }
+        /* eslint-disable */
     }, [])
 
     return(
         <div className="relative w-full h-screen flex items-center justify-center">
-            <Link to="/settings"><div className="absolute top-10 right-10 h-10 w-10 flex items-center justify-center shadow-lg rounded-lg">
-                <FiSettings/>
-            </div></Link>
+            <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
+                <Link to="/settings"><div className="">
+                    <FiSettings/>
+                </div></Link>
+                <div onClick={changeTheme} className="h-12 w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
+                        {
+                            theme === "light"?
+                                <BsMoon/>
+                            :
+                                <BsSun/>
+                        }
+                </div>
+            </div>
+            <img className="w-[8rem] absolute top-4 mix-blend-difference" src={logo} />
             <div className="w-11/12 lg:w-1/3 h-1/2 shadow-xl backhue rounded-2xl">
                 <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
                     <input value={na} onChange={(event)=> setNa(event.target.value)} type="text" className="w-3/4 p-4 text-lg border border-gray-200 text-black rounded-lg outline-0" placeholder="Enter your username"/>

@@ -7,6 +7,9 @@ import { BsPeople } from 'react-icons/bs';
 import { useEffect, useState } from "react";
 import Home from "../components/Hm";
 import Away from "../components/Am";
+import logo from '../assets/spotlogo.svg'
+import { FiSettings } from 'react-icons/fi';
+import { BsSun, BsMoon } from 'react-icons/bs'
 
 const Chat = () => {
     const navigate = useNavigate();
@@ -14,6 +17,7 @@ const Chat = () => {
 
     const [arrmsg, setArrmsg] = useState(messages)
     const [mess, setMess] = useState("")
+    const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -55,8 +59,23 @@ const Chat = () => {
         <div className="">
 
             <div className="absolute hidden lg:inline">
+                <img className="w-[8rem] ml-8 m-4 mix-blend-difference" src={logo} />
                 <Link to='/' className="flex gap-2 mt-4 mx-4 transition-all duration-300 ease-in-out hover:bg-blue-500 hover:text-white rounded-full  items-center p-5 py-2">Go Home <AiOutlineHome/></Link>
                 <Link to='/room' className=" flex gap-2 mt-2 mx-4 transition-all duration-300 ease-in-out hover:bg-blue-500 hover:text-white rounded-full items-center p-5 py-2">People <BsPeople/></Link>
+            </div>
+            
+            <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
+                <Link to="/settings"><div className="">
+                    <FiSettings/>
+                </div></Link>
+                <div onClick={changeTheme} className="h-12 w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
+                        {
+                            theme === "light"?
+                                <BsMoon/>
+                            :
+                                <BsSun/>
+                        }
+                </div>
             </div>
 
             <section className=" h-screen" id='chat'>
