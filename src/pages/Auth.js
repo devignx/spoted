@@ -9,6 +9,7 @@ import axios from "axios";
 import useStore from "../store/store";
 import logo from '../assets/spotlogo.svg'
 import { BsSun, BsMoon } from 'react-icons/bs'
+import BrowserChecker from "../components/BrowserChecker";
 
 const Auth = () => {
 
@@ -64,17 +65,18 @@ const Auth = () => {
             establishConnection();
         }
         else{
-            // navigate('/room')
+            //  navigate('/room')
         }
     }, [])
 
     return(
         <div>
+            {/* <BrowserChecker/> */}
             <div className="relative w-full h-screen flex items-center justify-center">
                 <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
-                    <Link to="/settings"><div className="">
+                    {/* <Link to="/settings"><div className="">
                         <FiSettings/>
-                    </div></Link>
+                    </div></Link> */}
                     <div onClick={changeTheme} className="h-12 pc w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
                             {
                                 theme === "light"?
@@ -100,7 +102,7 @@ const Auth = () => {
                     load && <Loader close={setLoad} state={suc}/>
                 }
                 <h3 className="tracking-widest">FUN TIPS</h3>
-                <p className="mt-2 opacity-60">Use usernames that are funny to make chats funnier, like Naai Sekar, Pattaasu Balu, Maatu ravi etc..</p>
+                <p className="mt-2 w-10/12 m-auto opacity-60">Use usernames that are funny to make chats funnier, like Naai Sekar, Pattaasu Balu, Maatu ravi etc..</p>
             </div>    
             {/* <div className="m-auto flex flex-wrap w-full font-semibold justify-center items-center p-3 gap-4 mt-3">
                     <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Project Details</a>

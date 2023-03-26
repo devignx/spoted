@@ -5,7 +5,7 @@ import { TiTick } from 'react-icons/ti';
 const Loader = ({ state }) => {
 
     return(
-        <div className="my-6 mt-3 flex items-center w-fit m-auto justify-center gap-6">
+        <div className="my-6 mt-2 flex items-center w-fit m-auto justify-center gap-6">
             {
                 state? <div className="w-full h-full transition-all duration-300 ease-in-out flex gap-2 bg-green-600/20 py-2 px-4 rounded-full items-center justify-evenly">
                         <TiTick size={'25px'} color="green"/>

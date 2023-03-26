@@ -47,8 +47,8 @@ const Room = () => {
                     <h1 className="text-xl font-bold">{name}</h1>
                     <h1 className="text-xl font-bold text-blue-500">{ip}</h1>
                 </div>
-                <Link to='/settings' className="p-4 right-6 md:right-12 m-auto absolute"><FiSettings size='20px'/></Link>
-                <div onClick={changeTheme} className="h-12 w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
+                {/* <Link to='/settings' className="p-4 right-6 md:right-12 m-auto absolute"><FiSettings size='20px'/></Link> */}
+                <div onClick={changeTheme} className="h-12 w-12 mr-4 hover:cursor-pointer rounded-full flex items-center justify-center">
                         {
                             theme === "light"?
                                 <BsMoon/>

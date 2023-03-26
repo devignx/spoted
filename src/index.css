@@ -17,6 +17,21 @@ body{
   overflow-x: hidden;
 }
 
+
+/*centering absolute stuff*/
+
+.centerh{      
+  left: 50%;                        
+  transform: translate(-50%, 0)
+}
+
+.centerv{      
+  top: 50%;                        
+  transform: translate(0, -50%)
+  
+}
+
+
 ::-webkit-scrollbar-track {
     background-color: transparent;
     overflow: overlay;

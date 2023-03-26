@@ -65,9 +65,9 @@ const Chat = () => {
             </div>
             
             <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
-                <Link to="/settings"><div className="">
+                {/* <Link to="/settings"><div className="">
                     <FiSettings/>
-                </div></Link>
+                </div></Link> */}
                 <div onClick={changeTheme} className="h-12 w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
                         {
                             theme === "light"?
