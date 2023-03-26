@@ -3,10 +3,10 @@ import { BiErrorCircle } from 'react-icons/bi';
 
 const Error = ({ retry }) => {
     return(
-        <div className="absolute bottom-10 w-3/4 lg:w-2/4 h-fit flex flex-col lg:flex-row items-center justify-center gap-6 shadow-lg rounded-lg p-4">
+        <div className="my-4 w-fit m-auto flex gap-6 bg-red-600/30 py-3 px-6 rounded-full items-center justify-evenly">
             <BiErrorCircle size={'25px'} color="red"/>
             <h1>An error occured at our end please try again</h1>
-            <button onClick={() => retry()} className="bg-blue-500 px-6 py-2 text-white rounded-lg">Retry</button>
+            <button onClick={() => retry()} className="bg-white px-4 py-1 text-black rounded-lg">Retry</button>
         </div>
     )
 }

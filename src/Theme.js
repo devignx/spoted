@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components"
 
 export const lightTheme =  {
-    background: '#fff',
+    background: '#E6E2F3',
     text: '#000',
     hue: '#fff',
     load: '#14171c',
@@ -9,9 +9,9 @@ export const lightTheme =  {
 }
 
 export const darkTheme = {
-    background: 'rgba(38, 36, 45)',
+    background: '#26242d',
     text: '#fff',
-    hue: '#0d0d0d50',
+    hue: '#1A1921',
     load: '#f1f5f9',
     loadCol: '#363537',
 }
@@ -22,11 +22,16 @@ export const GlobalStyles = createGlobalStyle`
         color: ${({ theme }) => theme.text};
     }
 
+    .backd{
+        background-color: ${({ theme }) => theme.background};
+        color: ${({ theme }) => theme.text};
+    }
+
     .backhue{
         background-color: ${({ theme }) => theme.hue};
     }
 
     .lds-ripple div{
-        border: 4px solid ${({ theme }) => theme.text};
+        border: 3px solid ${({ theme }) => theme.text};
     }
 `

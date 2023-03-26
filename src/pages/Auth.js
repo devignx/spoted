@@ -64,39 +64,49 @@ const Auth = () => {
             establishConnection();
         }
         else{
-            navigate('/room')
+            // navigate('/room')
         }
-        /* eslint-disable */
     }, [])
 
     return(
-        <div className="relative w-full h-screen flex items-center justify-center">
-            <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
-                <Link to="/settings"><div className="">
-                    <FiSettings/>
-                </div></Link>
-                <div onClick={changeTheme} className="h-12 w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
-                        {
-                            theme === "light"?
-                                <BsMoon/>
-                            :
-                                <BsSun/>
-                        }
+        <div>
+            <div className="relative w-full h-screen flex items-center justify-center">
+                <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
+                    <Link to="/settings"><div className="">
+                        <FiSettings/>
+                    </div></Link>
+                    <div onClick={changeTheme} className="h-12 pc w-12 hover:cursor-pointer rounded-full flex items-center justify-center">
+                            {
+                                theme === "light"?
+                                    <BsMoon/>
+                                :
+                                    <BsSun/>
+                            }
+                    </div>
+                </div>
+                <img className="w-[8rem] absolute top-4 mix-blend-difference" src={logo} />
+                <div className="w-11/12 lg:w-1/3 h-1/2 rounded-2xl">
+                    <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
+                        <input required value={na} onChange={(event)=> setNa(event.target.value)}  name="name" autoComplete="true" className="w-3/4 p-3 px-4 md:p-4 text-lg border border-gray-200 text-black focus:drop-shadow-xl rounded-lg outline-0" autoFocus placeholder="Enter your username"/>
+                        <button disabled={load} onClick={handleSubmit} className="bg-blue-500 w-3/4 uppercase tracking-widest p-3 md:p-4 text-white text-lg rounded-lg">Enter</button>
+                    </form>
                 </div>
             </div>
-            <img className="w-[8rem] absolute top-4 mix-blend-difference" src={logo} />
-            <div className="w-11/12 lg:w-1/3 h-1/2 shadow-xl backhue rounded-2xl">
-                <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
-                    <input value={na} onChange={(event)=> setNa(event.target.value)} type="text" className="w-3/4 p-4 text-lg border border-gray-200 text-black rounded-lg outline-0" placeholder="Enter your username"/>
-                    <button disabled={load} onClick={handleSubmit} className="bg-blue-500 w-3/4 py-4 text-white text-lg rounded-lg">Enter</button>
-                </form>
-            </div>
-            {
-                error && <Error retry={establishConnection}/>
-            }
-            {
-                load && <Loader close={setLoad} state={suc}/>
-            }
+            <div className="m-auto backhue absolute bottom-0 w-full text-sm py-6 text-center">
+                {
+                    error && <Error retry={establishConnection}/>
+                }
+                {
+                    load && <Loader close={setLoad} state={suc}/>
+                }
+                <h3 className="tracking-widest">FUN TIPS</h3>
+                <p className="mt-2 opacity-60">Use usernames that are funny to make chats funnier, like Naai Sekar, Pattaasu Balu, Maatu ravi etc..</p>
+            </div>    
+            {/* <div className="m-auto flex flex-wrap w-full font-semibold justify-center items-center p-3 gap-4 mt-3">
+                    <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Project Details</a>
+                    <Link to='/why' className="p-2 px-4 rounded-lg text-sm uppercase">About</Link>
+                    <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Developer Contact</a>
+                </div> */}
         </div>
     )
 }

@@ -40,8 +40,8 @@ const Room = () => {
     }
 
     return(
-        <div className="relative w-full h-screen">
-            <div className="justify-center flex backhue items-center">
+        <div className="relative w-full backd h-screen">
+            <div className="justify-center backhue flex items-center">
                 <div className="w-full p-6 flex  items-center justify-center gap-4">
                 <img className="w-[6rem] absolute left-4 top-0 pc mix-blend-difference" src={logo} />
                     <h1 className="text-xl font-bold">{name}</h1>
@@ -65,7 +65,7 @@ const Room = () => {
                 <div className="w-full md:w-1/2 h-5/6 backhue rounded-lg p-4 overflow-scroll overflow-x-hidden">
                     {
                         peers.map((peer, index)=> <div key={index} className="w-full mb-4">
-                            <div className=" m-auto px-6 md:px-12 p-6 bg-blue-500/20 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
+                            <div className=" m-auto px-6 md:px-12 p-6 bg-blue-500/10 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
                                 <div className="flex gap-3 items-center ">
                                     <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
                                     <h1>{peer.name}</h1>
