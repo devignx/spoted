@@ -111,9 +111,9 @@ const Room = () => {
                         people?
                             peers.map((peer, index)=> <div key={index} className="w-full mb-4">
                                 <div className="anim m-auto px-6 md:px-12 p-6 bg-blue-500/10 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
-                                    <div className="flex gap-3 items-center ">
-                                        <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
-                                        <h1>{peer.name}</h1>
+                                    <div className="flex max-w-[60%] gap-3 shrink-0 items-center ">
+                                        <BsPerson className="w-8 shrink-0 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
+                                        <h1 className=" break-all text-sm font-normal">{peer.name}</h1>
                                     </div>
                                     <button onClick={()=> { sendRequest(peer); setConnect(!connect); handleButtonText(); }} className={`${connect ? "bg-gray-500" : ""} font-thin text-white cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex items-center justify-center`}>
                                         {buttonText}
@@ -141,8 +141,8 @@ const Room = () => {
                     }
                 </div>
             </div>
-            <abbr title="Your Public IP Adress" className=" absolute backd z-[9999] p-2 rounded centerh bottom-4 flex justify-start gap-4">
-                    <h1 className="text-sm uppercase">{name}</h1>
+            <abbr title="Your Public IP Adress" className=" absolute backd z-[9999]  p-2 rounded centerh bottom-4 flex justify-start gap-4">
+                    <h1 className="text-sm shrink-0 uppercase">{name}</h1>
                     <h1 className="text-sm text-blue-500">{ip}</h1>
             </abbr>
         </div>
