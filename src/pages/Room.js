@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/store";
 import { BsPerson, BsChat } from "react-icons/bs";
@@ -10,10 +10,12 @@ import { AiOutlineHome } from 'react-icons/ai';
 
 const Room = () => {
 
+    const [people, setPeople] = useState(true)
+
     const navigate = useNavigate();
     const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
-    const { socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages}))
+    const { socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages, setRequests, requests } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages, requests: state.requests, setRequests: state.setRequests}))
 
     useEffect(()=> {
         if(socket === null){
@@ -30,6 +32,14 @@ const Room = () => {
         }
     },[])
 
+    const sendRequest = (data) => {
+        const req = {
+            type: 'request',
+            data: data
+        }
+        socket.send(JSON.stringify(req))
+    }
+
     socket.onmessage = (data) => {
         const response = JSON.parse(data.data)
         if(response.type === "peerlist"){
@@ -38,8 +48,10 @@ const Room = () => {
         if(response.type === "message"){
             setMessages([...messages, response])
         }
+        if(response.type === "request"){
+            setRequests([...requests, response])
+        }
     }
-    const reqs =2;
 
     return(
         <div className="relative w-full backd h-screen">
@@ -66,23 +78,36 @@ const Room = () => {
             <div className="w-full h-5/6 flex flex-col items-center justify-center">
                 
             <div className="flex w-1/2 items-center justify-center ">
-                    <button className="text-lg p-2 w-full px-8 rounded-lg rounded-b-none rounded-tr-none pb-3 backhue ">People</button>
-                    <button className="text-lg p-2 w-full px-8 opacity-50 rounded-lg rounded-tl-none rounded-b-none pb-3 backhue">Requests <span className="bg-red-600 rounded-full p-1 px-2 text-xs">{reqs}</span></button>
+                    <button onClick={()=> setPeople(true)} className={`text-lg p-2 w-full px-8 ${people? '': "opacity-50"} rounded-lg rounded-b-none rounded-tr-none pb-3 backhue`}>People</button>
+                    <button onClick={()=> setPeople(false)} className={`text-lg p-2 w-full px-8 ${people? 'opacity-50': ""} rounded-lg rounded-tl-none rounded-b-none pb-3 backhue`}>Requests <span className="bg-red-600 rounded-full p-1 px-2 text-xs">{requests.length}</span></button>
                 </div>
                 <div className="w-full md:w-1/2 h-5/6 backhue rounded-lg rounded-t-none p-4 overflow-scroll overflow-x-hidden">
                     {
-                        peers.map((peer, index)=> <div key={index} className="w-full mb-4">
-                            <div className=" m-auto px-6 md:px-12 p-6 bg-blue-500/10 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
-                                <div className="flex gap-3 items-center ">
-                                    <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
-                                    <h1>{peer.name}</h1>
+                        people?
+                            peers.map((peer, index)=> <div key={index} className="w-full mb-4">
+                                <div className=" m-auto px-6 md:px-12 p-6 bg-blue-500/10 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
+                                    <div className="flex gap-3 items-center ">
+                                        <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
+                                        <h1>{peer.name}</h1>
+                                    </div>
+                                    <div onClick={()=> sendRequest(peer)} className=" text-white cursor-pointer p-3 px-5 bg-blue-500 rounded-lg flex items-center justify-center">
+                                        <h1>Connect</h1>
+                                    </div>
                                 </div>
-                                <div className=" text-white cursor-pointer p-3 px-5 bg-blue-500 rounded-lg flex items-center justify-center">
-                                    <h1>Connect</h1>
+                                
+                            </div>)
+                        :
+                            requests.map((peer, index)=> <div key={index} className="w-full mb-4">
+                                <div className=" m-auto px-6 md:px-12 p-6 bg-blue-500/10 font-semibold rounded-lg mb-2 flex items-center justify-between w-full gap-4">
+                                    <div className="flex gap-3 items-center ">
+                                        <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
+                                        <h1>{peer.name}</h1>
+                                    </div>
+                                    <div className=" text-white cursor-pointer p-3 px-5 bg-blue-500 rounded-lg flex items-center justify-center">
+                                        <h1>Connect</h1>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                        </div>)
+                            </div>)
                     }
                 </div>
             </div>

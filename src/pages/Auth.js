@@ -71,7 +71,6 @@ const Auth = () => {
 
     return(
         <div>
-            {/* <BrowserChecker/> */}
             <div className="relative w-full h-screen flex items-center justify-center">
                 <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
                     {/* <Link to="/settings"><div className="">
