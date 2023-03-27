@@ -92,14 +92,14 @@ const Room = () => {
             <div className="w-full h-5/6 flex flex-col items-center justify-center">
                 
             <div className="flex w-full md:w-1/2 items-center justify-center">
-                    <button onClick={()=> setPeople(true)} className={`text-lg p-2 w-full px-8 ${people? 'drop-shadow-xl z-[0]': "opacity-50"} transition-all duration-300 ease-in-out rounded-lg rounded-b-none rounded-tr-none pb-3 backhue`}>People ({peers.length})</button>
-                    <button onClick={()=> setPeople(false)} className={`text-lg p-2 w-full px-8 ${people? 'opacity-50': "drop-shadow-xl z-[0]"} transition-all duration-300 ease-in-out rounded-lg rounded-tl-none rounded-b-none pb-3 backhue`}>Requests <span className={`${requests.length==0 ? "bg-none": "bg-red-600 text-xs"} rounded-full text-white p-[3px] px-[7px]`}>{requests.length > 0 && `${requests.length}`}</span></button>
+                    <button onClick={()=> setPeople(true)} className={`lg:text-lg p-2 w-full px-8 ${people? 'drop-shadow-xl z-[0]': "opacity-50"} transition-all duration-300 ease-in-out rounded-lg rounded-b-none rounded-tr-none pb-3 backhue`}>People ({peers.length})</button>
+                    <button onClick={()=> setPeople(false)} className={`lg:text-lg p-2 w-full px-8 ${people? 'opacity-50': "drop-shadow-xl z-[0]"} transition-all duration-300 ease-in-out rounded-lg rounded-tl-none rounded-b-none pb-3 backhue`}>Requests <span className={`${requests.length==0 ? "bg-none": "bg-red-600 text-xs"} rounded-full text-white p-[3px] px-[7px]`}>{requests.length > 0 && `${requests.length}`}</span></button>
                 </div>
                 <div className="w-full z-[4] md:w-1/2 h-5/6 backhue rounded-lg rounded-t-none transition-all duration-300 ease-in-out p-4 overflow-scroll overflow-x-hidden">
                     {
                     peers.length == 0 
                     && 
-                        <div className="w-full h-5/6 flex flex-col text-center justify-center items-center rale uppercase">
+                        <div className="w-full scale-[80%] md:scale-[100%] h-5/6 flex flex-col text-center justify-center items-center rale uppercase">
                             <GiSadCrab className="opacity-20" size="8rem" />
                             <p className="opacity-20 text-xl">You're the only on here</p>
                             <p className="text-[0.7rem] opacity-60 tracking-widest mt-2">Try Inviting your friends inside your Network</p>
@@ -128,7 +128,7 @@ const Room = () => {
                                         <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
                                         <h1>{peer.name}</h1>
                                     </div>
-                                    <div className="flex gap-7">
+                                    <div className="flex gap-4 md:gap-7">
                                         <div className=" text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
                                             <h1 className="pclg">Accept</h1><BiCheck/>
                                         </div>
