@@ -16,15 +16,13 @@ import Mode from "../components/Mode";
 const Room = () => {
 
     const [people, setPeople] = useState(true)
-    const [connect, setConnect] = useState(false)   
-    const [buttonText, setButtonText] = useState("Connect")
 
-    const handleButtonText = () => {
-        if(connect==false){
-            setButtonText("Withdraw");
+    const handleButtonText = (bool) => {
+        if(bool){
+            return "Withdraw";
         }
         else{
-            setButtonText("Connect");
+            return "Connect";
         }
     }
 
@@ -48,6 +46,27 @@ const Room = () => {
         }
     },[])
 
+    const handlePress = (peer, index) => {
+        const temp = peers
+        if(temp[index].sent) {
+            temp[index].sent = false
+            withRequest(peer.uid)
+        }
+        else{
+            temp[index].sent = true;
+            sendRequest(peer)
+        }
+        setPeers([...temp])
+    }
+
+    const withRequest = (id) => {
+        const req = {
+            type: "withdraw",
+            id: id
+        }
+        socket.send(JSON.stringify(req))
+    }
+
     const sendRequest = (data) => {
         const req = {
             type: 'request',
@@ -65,7 +84,7 @@ const Room = () => {
             setMessages([...messages, response])
         }
         if(response.type === "request"){
-            setRequests([...requests, response])
+            setRequests([...response.requests])
         }
     }
 
@@ -108,8 +127,8 @@ const Room = () => {
                                             <BsPerson className="w-8 shrink-0 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
                                             <h1 className=" break-all text-sm font-normal">{peer.name}</h1>
                                         </div>
-                                        <button onClick={()=> { sendRequest(peer); setConnect(!connect); handleButtonText(); }} className={`${connect ? "bg-gray-500" : ""} font-thin text-white cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex items-center justify-center`}>
-                                            {buttonText}
+                                        <button onClick={()=> handlePress(peer, index)} className={`${peer.sent ? "bg-gray-500" : ""} font-thin text-white cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex items-center justify-center`}>
+                                            {handleButtonText(peer.sent)}
                                         </button>
                                     </div>
 
@@ -131,7 +150,7 @@ const Room = () => {
                                         </div>
                                         <div className="flex gap-4 md:gap-7">
                                             <div className=" text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
-                                                <h1 className="pclg">Accept</h1><BiCheck/>
+                                                <button className="pclg">Accept</button><BiCheck/>
                                             </div>
                                             <div className=" text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">
                                                 <button className="pclg">Deny</button><RxCross2/>
@@ -151,10 +170,6 @@ const Room = () => {
                     <h1 className="text-sm shrink-0 uppercase">{name}</h1>
                     <h1 className="text-sm text-blue-500">{ip}</h1>
             </abbr>
-            {
-                !connect ? ""
-            :   
-                <Mode/>}
         </div>
     )
 }
