@@ -9,6 +9,7 @@ import { GlobalStyles, darkTheme, lightTheme } from './Theme';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Why from './pages/Why';
+import Private from './pages/Private';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/room' element={<Room/>}/>
           <Route path='/chat' element={<Chat/>}/>
           <Route path='/why' element={<Why/>}/>
+          <Route path='/private' element={<Private/>}/>
         </Routes>
       </Router>
     </ThemeProvider>

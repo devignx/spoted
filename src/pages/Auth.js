@@ -18,6 +18,7 @@ const Auth = () => {
     const [load, setLoad] = useState(false)
     const [na, setNa] = useState("")
     const [suc, setSuc] = useState(false)
+    const [disabled, setDisabled] = useState(true)
     const navigate = useNavigate()
     const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
@@ -38,6 +39,7 @@ const Auth = () => {
                     const arr = res.data.ip.split('.')
                     setIp(`${arr[0]}.${arr[1]}.${arr[2]}`)
                     setSocket(sock)
+                    setDisabled(false)
                 }
                 else{
                     setError(true)
@@ -89,7 +91,7 @@ const Auth = () => {
                 <div className="w-11/12 lg:w-1/3 h-1/2 rounded-2xl">
                     <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
                         <input required value={na} onChange={(event)=> setNa(event.target.value)}  name="name" autoComplete="true" className="w-3/4 p-3 px-4 md:p-4 text-lg backhue transition-all duration-300 ease-in-out focus:drop-shadow-xl rounded-lg outline-0" autoFocus placeholder="Enter your username"/>
-                        <button disabled={load} onClick={handleSubmit} className={`bg-blue-500 ${load? "opacity-50 bg-gray-400" : ""}  w-3/4 uppercase tracking-widest p-3 md:p-4 text-white text-lg rounded-lg`}>Enter</button>
+                        <button disabled={disabled} onClick={handleSubmit} className={`bg-blue-500 ${disabled? "opacity-50 bg-gray-400" : ""}  w-3/4 uppercase tracking-widest p-3 md:p-4 text-white text-lg rounded-lg`}>Enter</button>
                     </form>
                 </div>
             </div>
@@ -103,11 +105,11 @@ const Auth = () => {
                 <h3 className="tracking-widest">FUN TIPS</h3>
                 <p className="mt-2 w-10/12 m-auto opacity-60">Use usernames that are funny to make chats funnier, like Naai Sekar, Pattaasu Balu, Maatu ravi etc..</p>
             </div>    
-            {/* <div className="m-auto flex flex-wrap w-full font-semibold justify-center items-center p-3 gap-4 mt-3">
+            <div className="m-auto flex flex-wrap w-full font-semibold justify-center items-center p-3 gap-4 mt-3">
                     <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Project Details</a>
                     <Link to='/why' className="p-2 px-4 rounded-lg text-sm uppercase">About</Link>
                     <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Developer Contact</a>
-                </div> */}
+                </div>
         </div>
     )
 }
