@@ -9,6 +9,7 @@ import { BsSun, BsMoon } from 'react-icons/bs'
 import { AiOutlineHome } from 'react-icons/ai';
 import {RxCross2} from 'react-icons/rx'
 import {BiCheck} from 'react-icons/bi'
+import ShareMenu from "../components/ShareMenu";
 import {GiSadCrab} from 'react-icons/gi'
 
 const Room = () => {
@@ -92,7 +93,7 @@ const Room = () => {
             <div className="w-full h-5/6 flex flex-col items-center justify-center">
                 
             <div className="flex w-full md:w-1/2 items-center justify-center">
-                    <button onClick={()=> setPeople(true)} className={`lg:text-lg p-2 w-full px-8 ${people? 'drop-shadow-xl z-[0]': "opacity-50"} transition-all duration-300 ease-in-out rounded-lg rounded-b-none rounded-tr-none pb-3 backhue`}>People ({peers.length})</button>
+                    <button onClick={()=> setPeople(true)} className={`lg:text-lg p-2 w-full px-8 ${people? 'drop-shadow-xl z-[1]': "opacity-50"} transition-all duration-300 ease-in-out rounded-lg rounded-b-none rounded-tr-none pb-3 backhue`}>People ({peers.length})</button>
                     <button onClick={()=> setPeople(false)} className={`lg:text-lg p-2 w-full px-8 ${people? 'opacity-50': "drop-shadow-xl z-[0]"} transition-all duration-300 ease-in-out rounded-lg rounded-tl-none rounded-b-none pb-3 backhue`}>Requests <span className={`${requests.length==0 ? "bg-none": "bg-red-600 text-xs"} rounded-full text-white p-[3px] px-[7px]`}>{requests.length > 0 && `${requests.length}`}</span></button>
                 </div>
                 <div className="w-full z-[4] md:w-1/2 h-5/6 backhue rounded-lg rounded-t-none transition-all duration-300 ease-in-out p-4 overflow-scroll overflow-x-hidden">
@@ -102,7 +103,8 @@ const Room = () => {
                         <div className="w-full scale-[80%] md:scale-[100%] h-5/6 flex flex-col text-center justify-center items-center rale uppercase">
                             <GiSadCrab className="opacity-20" size="8rem" />
                             <p className="opacity-20 text-xl">You're the only on here</p>
-                            <p className="text-[0.7rem] opacity-60 tracking-widest mt-2">Try Inviting your friends inside your Network</p>
+                            <p className="text-[0.7rem] opacity-60 tracking-widest mt-2">Try Inviting your friends to your Network</p>
+                            <button><ShareMenu/></button>
                         </div>
                         
                     }
