@@ -64,7 +64,7 @@ const Chat = () => {
                 <Link to='/room' className=" flex gap-2 mt-2 mx-4 transition-all duration-300 ease-in-out hover:bg-blue-500 hover:text-white rounded-full items-center p-5 py-2">People <BsPeople/></Link>
             </div>
             
-            <Link to='/' className="flex fixed top-0 centerh mob shrink-0 gap-2 mt-4 transition-all duration-300 ease-in-out bg-blue-500 hover:text-white rounded-full  items-center p-5 py-2">Go Home <AiOutlineHome/></Link>
+            <Link to='/' className="flex fixed top-0 z-[99999] centerh mob shrink-0 gap-2 mt-4 transition-all duration-300 ease-in-out bg-blue-500 hover:text-white rounded-full  items-center p-5 py-2">Go Home <AiOutlineHome/></Link>
             
             <div className="absolute top-10 right-10 scale-[120%] flex flex-col gap-6 items-center justify-center">
                 {/* <Link to="/settings"><div className="">
