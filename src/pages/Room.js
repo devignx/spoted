@@ -12,10 +12,13 @@ import {BiCheck} from 'react-icons/bi'
 import ShareMenu from "../components/ShareMenu";
 import {GiSadCrab} from 'react-icons/gi'
 import Mode from "../components/Mode";
+import Load from "../components/Load";
 
 const Room = () => {
 
     const [people, setPeople] = useState(true)
+    const [load, setLoad] = useState(false)
+    const [sender, setSender] = useState(false)
 
     const handleButtonText = (bool) => {
         if(bool){
@@ -29,7 +32,7 @@ const Room = () => {
     const navigate = useNavigate();
     const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
-    const { socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages, setRequests, requests } = useStore((state) => ({socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages, requests: state.requests, setRequests: state.setRequests}))
+    const { peerid, setPeerid, socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages, setRequests, requests } = useStore((state) => ({peerid: state.peerid, setPeerid: state.setPeerid, socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages, requests: state.requests, setRequests: state.setRequests}))
 
     useEffect(()=> {
         if(socket === null){
@@ -47,6 +50,9 @@ const Room = () => {
     },[])
 
     const handleAccept = (peer) => {
+        setPeerid(peer.uid)
+        setSender(false)
+        setLoad(true)
         const reqObj = {
             type: 'accept',
             uid: peer.uid
@@ -113,7 +119,9 @@ const Room = () => {
         }
 
         if(response.type === 'accept'){
-            
+            setPeerid(response.id)
+            setSender(true)
+            setLoad(true)
         }
     }
 
@@ -199,6 +207,9 @@ const Room = () => {
                     <h1 className="text-sm shrink-0 uppercase">{name}</h1>
                     <h1 className="text-sm text-blue-500">{ip}</h1>
             </abbr>
+            {
+                load && <Load sender={sender} socket={socket} id={peerid}/>
+            }
         </div>
     )
 }

@@ -1,6 +1,11 @@
 let localStream;
 let remoteStream;
 let peerConnection;
+let lc;
+let dc;
+let rc;
+let conn;
+
 
 const servers = {
     iceServers: [
@@ -18,10 +23,39 @@ const permission = async () =>  {
     .catch(()=> console.log('denied'))
 }
 
-const connection = async () => {
-    peerConnection = new RTCPeerConnection(servers)
-    let offer = await peerConnection.createOffer()
-    console.log(offer)
+const createOffer = () => {
+    conn = new RTCPeerConnection(servers)
+    dc = conn.createDataChannel("channel")
+    dc.onmessage = e => console.log(e.data)
+    dc.onopen = e => console.log('connection opened');
+    dc.onclose = e => console.log('closed')
+    conn.createOffer().then((o) => conn.setLocalDescription(o)).then(() => console.log('offer set'))
 }
 
-export default connection;
+const getLocalsdp = () => {
+    return JSON.stringify(conn.localDescription)
+}
+
+const remoteDes = (answer) => {
+    conn.setRemoteDescription(answer)
+}
+
+const createAnswer = (offer) => {
+    conn = new RTCPeerConnection(servers)
+    conn.ondatachannel = e => {
+        conn.dc = e.channel;
+        conn.dc.onmessage = e => console.log(e.data);
+        conn.dc.onopen = e => console.log('connection opened');
+        conn.dc.onclose = e => console.log('closed')
+    }
+    conn.setRemoteDescription(offer)
+    conn.createAnswer().then((o) => conn.setLocalDescription(o)).then(() => console.log('offer set'))
+}
+
+
+export default {
+    createOffer,
+    createAnswer,
+    getLocalsdp,
+    remoteDes
+};

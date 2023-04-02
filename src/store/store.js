@@ -9,6 +9,8 @@ const useStore = create((set) => ({
     loged: false,
     messages: [],
     requests: [],
+    peerid: null,
+    setPeerid: (peerid) => set(()=> ({peerid})),
     setRequests: (requests) => set(()=> ({requests})),
     setMessages: (messages) => set(()=> ({messages})),
     setLoged: (loged) => set(()=> ({loged})),
