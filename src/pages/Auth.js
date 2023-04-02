@@ -37,7 +37,7 @@ const Auth = () => {
                         setLoad(false)
                     }, 3000)
                     const arr = res.data.ip.split('.')
-                    setIp(`${arr[0]}.${arr[1]}.${arr[2]}`)
+                    setIp(`${arr[0]}.${arr[1]}`)
                     setSocket(sock)
                     setDisabled(false)
                 }
