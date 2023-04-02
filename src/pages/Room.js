@@ -46,12 +46,19 @@ const Room = () => {
         }
     },[])
 
+    const handleAccept = (peer) => {
+        const reqObj = {
+            type: 'accept',
+            uid: peer.uid
+        }
+        socket.send(JSON.stringify(reqObj))
+    }
+
     const handleDeny = (peer) => {
         const reqObj = {
             type: 'deny',
             uid: peer.uid
         }
-        console.log(reqObj)
         socket.send(JSON.stringify(reqObj))
     }
 
@@ -103,6 +110,10 @@ const Room = () => {
                 }
             });
             setPeers([...temp])
+        }
+
+        if(response.type === 'accept'){
+            
         }
     }
 
@@ -167,7 +178,7 @@ const Room = () => {
                                             <h1>{peer.name}</h1>
                                         </div>
                                         <div className="flex gap-4 md:gap-7">
-                                            <div className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
+                                            <div onClick={()=> handleAccept(peer)} className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
                                                 <button className="pclg">Accept</button><BiCheck/>
                                             </div>
                                             <div onClick={()=> handleDeny(peer)} className="text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">

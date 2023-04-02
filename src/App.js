@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Why from './pages/Why';
 import Private from './pages/Private';
+import Peer from './pages/Peer';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/chat' element={<Chat/>}/>
           <Route path='/why' element={<Why/>}/>
           <Route path='/private' element={<Private/>}/>
+          <Route path='/peer' element={<Peer/>}/>
         </Routes>
       </Router>
     </ThemeProvider>
