@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../styles/Globals.css';
 import Error from "../components/Error";
-import { FiSettings } from 'react-icons/fi';
 import Loader from "../components/Loader";
 import { Link, useNavigate } from "react-router-dom";
 import openConnection from "../websocket";
@@ -67,7 +66,7 @@ const Auth = () => {
             establishConnection();
         }
         else{
-           // navigate('/room')
+            navigate('/room')
         }
     }, [])
 
