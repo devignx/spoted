@@ -75,8 +75,12 @@ const Load = ({sender, socket, id}) => {
     }
 
     return(
-        <div className="absolute top-0 w-full h-full bg-black z-[6]">
-            <h1>load</h1>
+        <div className="absolute top-0 w-full z-50 backhue">
+            <div className="w-full h-screen flex flex-col gap-12 justify-center items-center">
+                <div className="lds-ripple block scale-150"></div>
+                <p className="opacity-70 mt-6 text-sm text-center">Hang on!</p>
+                <p className="-mt-10 opacity-50 text-xs">Fun Fact: Your Peer is also staring at the screen like you</p>
+            </div>
         </div>
     )
 }

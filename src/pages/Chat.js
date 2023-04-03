@@ -81,7 +81,7 @@ const Chat = () => {
             </div>
 
             <section className=" h-screen" id='chat'>
-                <div className="w-full lg:w-[50%] h-full backhue shadow-xl p-3 h-full  m-auto overflow-y-scroll">
+                <div className="w-full lg:w-[50%] h-full backhue shadow-xl p-3 m-auto overflow-y-scroll">
                     <div className="w-full h-10/12">
                         <div className="flex relative flex-col mb-[6rem]">
                             {
