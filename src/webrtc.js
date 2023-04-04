@@ -35,7 +35,6 @@ const createOffer = () => {
     try{
         conn = new RTCPeerConnection(servers)
         dc = conn.createDataChannel("channel")
-        dc.onmessage = e => console.log(e.data)
         dc.onopen = e => console.log('connection opened');
         dc.onclose = e => console.log('closed')
         conn.createOffer().then((o) => conn.setLocalDescription(o)).then(() => console.log('offer set'))
@@ -65,7 +64,6 @@ const createAnswer = (offer) => {
         conn = new RTCPeerConnection(servers)
         conn.ondatachannel = e => {
             dc = e.channel;
-            dc.onmessage = e => console.log(e.data);
             dc.onopen = e => console.log('connection opened');
             dc.onclose = e => console.log('closed')
         }

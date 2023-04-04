@@ -13,13 +13,9 @@ const Peer = () => {
         navigate('/room')
     }
 
-    useEffect(()=> {
-        console.log(dc)
-    }, [])
-
     return (
         <div>
-            <Mode/>
+            <Mode dc={dc}/>
         </div>
     )
 }
