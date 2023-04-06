@@ -23,12 +23,23 @@ const getDc = () => {
     return dc;
 }
 
-const permission = async () =>  {
-    navigator.mediaDevices.getUserMedia({audio: false, video: true})
-    .then((stream)=> {
-        localStream = stream
+const permission = async (conn) =>  {
+    localStream = await navigator.mediaDevices.getUserMedia({audio: false, video: true})
+    document.getElementById('local').srcObject = localStream
+    remoteStream = new MediaStream()
+    document.getElementById('remote').srcObject = remoteStream
+
+    localStream.getTracks().forEach((tracks) => {
+        conn.addTrack(tracks, localStream)
     })
-    .catch(()=> console.log('denied'))
+
+    conn.ontrack = (event) => {
+        console.log(event.track)
+        event.streams[0].getTracks().forEach((tracks)=> {
+            console.log('hai')
+            remoteStream.addTrack(tracks)
+        })
+    }
 }
 
 const createOffer = () => {
@@ -83,5 +94,6 @@ export default {
     getLocalsdp,
     remoteDes,
     getConn,
-    getDc
+    getDc,
+    permission
 };
