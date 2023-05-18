@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 const ChatPop = ({ message, state }) => {
 
     useEffect(()=> {
-        setTimeout(()=> state(false), 15000)
+        setTimeout(()=> state(false), 7000)
     }, [])
 
     return(
