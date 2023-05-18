@@ -30,6 +30,9 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
+strict-wrap{
+  white-space: pre-wrap !important;
+}
 
 /*centering absolute stuff*/
 
