@@ -23,14 +23,29 @@ const Mode = ({ dc }) => {
             if(data.type === "goved"){
                 navigator('/private')
             }
+
+            if(data.type === "gofile"){
+                navigator('/file')
+            }
         }
     };
+
+    dc.onclose = e => {
+        navigator('/room')
+    }
 
     const handleVedeo = () => {
         dc.send(JSON.stringify({
             type: "goved"
         }))
         navigator('/private')
+    }
+
+    const handleFile = () => {
+        dc.send(JSON.stringify({
+            type: "gofile"
+        }))
+        navigator('/file')
     }
 
     const handleMessage = (event) => {
@@ -42,6 +57,10 @@ const Mode = ({ dc }) => {
         setMessage("")
     }
 
+    const close = () => {
+        dc.close()
+    }
+
     return (
         <div id='popup' className='fixed anim top-0 text-black w-full z-[99999]'> 
             <div className='relative flex w-full h-screen backd anim items-center justify-center'>
@@ -51,7 +70,7 @@ const Mode = ({ dc }) => {
                     <div className='flex flex-wrap gap-8 mt-8'>
                         <Link to = '/private' className='min-w-[7rem] md:min-w-[10rem] grow  basis-1  flex flex-col gap-3 justify-center items-center min-h-[7rem] md:min-h-[10rem] text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsFillMicFill size='25px'/><p className='opacity-50'> Audio chat</p></Link>
                         <div onClick={handleVedeo} className='min-w-[7rem] md:min-w-[10rem] basis-1 grow flex flex-col gap-3 justify-center items-center min-h-[7rem] md:min-h-[10rem] text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsCameraVideoFill size='25px'/><p className='opacity-50'> Video Call</p></div>
-                        <Link to = '/private' className='min-w-[7rem] md:min-w-[10rem] basis-1 grow w-full flex flex-col gap-3 justify-center items-center min-h-[7rem] md:min-h-[10rem] text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsChatSquareTextFill size='25px'/><p className='opacity-50'> Texting</p></Link>
+                        <div onClick={handleFile} className='min-w-[7rem] md:min-w-[10rem] basis-1 grow w-full flex flex-col gap-3 justify-center items-center min-h-[7rem] md:min-h-[10rem] text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsChatSquareTextFill size='25px'/><p className='opacity-50'> Texting</p></div>
                         <button className='w-10 h-10 backd absolute border-2 border-red-600 centerh rounded-full font-semibold -bottom-5'>X</button>
                     </div>
                 </div>
@@ -64,6 +83,9 @@ const Mode = ({ dc }) => {
                         <button type='submit' className='p-4 rounded-full bg-blue-500'><AiOutlineSend/></button>
                     </form>
                 </div>
+                <button onClick={close} className='absolute bottom-20 right-10'>
+                    Close connection
+                </button>
             </div>
         </div>
     );

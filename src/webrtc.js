@@ -1,9 +1,6 @@
-let localStream;
-let remoteStream;
-let peerConnection;
-let lc;
+let localStream = null;
+let remoteStream = null;
 let dc;
-let rc;
 let conn;
 
 
@@ -23,23 +20,27 @@ const getDc = () => {
     return dc;
 }
 
-const permission = async (conn) =>  {
-    localStream = await navigator.mediaDevices.getUserMedia({audio: false, video: true})
-    document.getElementById('local').srcObject = localStream
-    remoteStream = new MediaStream()
-    document.getElementById('remote').srcObject = remoteStream
-
-    localStream.getTracks().forEach((tracks) => {
-        conn.addTrack(tracks, localStream)
-    })
-
-    conn.ontrack = (event) => {
-        console.log(event.track)
-        event.streams[0].getTracks().forEach((tracks)=> {
-            console.log('hai')
-            remoteStream.addTrack(tracks)
+const permission = async () =>  {
+    conn.ontrack = event => {
+        event.streams[0].getTracks().forEach((track)=> {
+            remoteStream.addTrack(track)
         })
+        console.log('hello')
     }
+    conn.onaddstream = event => {
+        // event.streams[0].getTracks().forEach((track)=> {
+        //     remoteStream.addTrack(track)
+        // })
+        console.log('hello')
+    }
+    localStream = await navigator.mediaDevices.getUserMedia({audio: false, video: true})
+    remoteStream = new MediaStream()
+    localStream.getTracks().forEach((track)=> {
+        conn.addTrack(track, localStream)
+    })
+    console.log(conn.remoteDescription)
+    document.getElementById('local').srcObject = localStream
+    document.getElementById('remote').srcObject = remoteStream
 }
 
 const createOffer = () => {
@@ -47,7 +48,6 @@ const createOffer = () => {
         conn = new RTCPeerConnection(servers)
         dc = conn.createDataChannel("channel")
         dc.onopen = e => console.log('connection opened');
-        dc.onclose = e => console.log('closed')
         conn.createOffer().then((o) => conn.setLocalDescription(o)).then(() => console.log('offer set'))
         return true
     }
@@ -76,7 +76,6 @@ const createAnswer = (offer) => {
         conn.ondatachannel = e => {
             dc = e.channel;
             dc.onopen = e => console.log('connection opened');
-            dc.onclose = e => console.log('closed')
         }
         conn.setRemoteDescription(offer)
         conn.createAnswer().then((o) => conn.setLocalDescription(o)).then(() => console.log('offer set'))

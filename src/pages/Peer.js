@@ -9,10 +9,6 @@ const Peer = () => {
     const dc = connection.getDc()
     const navigate = useNavigate()
 
-    dc.onclose = e => {
-        navigate('/room')
-    }
-
     return (
         <div>
             <Mode dc={dc}/>

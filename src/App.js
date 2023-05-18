@@ -11,6 +11,7 @@ import Chat from './pages/Chat';
 import Why from './pages/Why';
 import Vedeo from './pages/Vedeo';
 import Peer from './pages/Peer';
+import File from './pages/File';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/why' element={<Why/>}/>
           <Route path='/private' element={<Vedeo/>}/>
           <Route path='/peer' element={<Peer/>}/>
+          <Route path='/file' element={<File/>}/>
         </Routes>
       </Router>
     </ThemeProvider>
