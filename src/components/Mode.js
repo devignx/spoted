@@ -101,9 +101,9 @@ const Mode = ({ dc }) => {
                     </div>
                 </div>
                 <div className="absolute bottom-0 w-full h-20">
-                    <form onClick={handleMessage} className='w-full h-full flex items-center justify-center gap-4'>
+                    <form className='w-full h-full flex items-center justify-center gap-4'>
                         <input value={message} onChange={(event) => setMessage(event.target.value)} type='text' className='outline-none bg-black/[.05] drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' placeholder='Type message'/>
-                        <button type='submit' className='fixed bottom-[2.5rem] lg:bottom-[2.7rem] right-[10%] lg:right-[28%] scale-[150%]'><AiOutlineSend/></button>
+                        <button onClick={handleMessage} type='submit' className='fixed bottom-[2.5rem] lg:bottom-[2.7rem] right-[10%] lg:right-[28%] scale-[150%]'><AiOutlineSend/></button>
                     </form>
                 </div>
             </div>
