@@ -128,9 +128,9 @@ const Mode = ({ dc }) => {
                         ''}
                     </div>
                     <div className={`${ismsg ? 'hidden' : ''} anim flex flex-wrap gap-8`}>
-                        <Link to = '/private' className='min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsFillMicFill color='#3b82f6' size='25px'/><p className='opacity-50'> Audio chat</p></Link>
-                        <button onClick={handleVideo} className='min-w-[7rem] basis-1 grow flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsCameraVideoFill color='#3b82f6' size='25px'/><p className='opacity-50'> Video Call</p></button>
-                        <button onClick={handleFile} className='min-w-[7rem] basis-1 grow w-full flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BiTransferAlt color='#3b82f6' size='25px'/><p className='opacity-50'> File Transfer</p></button>
+                        <Link to = '/private' className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BsFillMicFill color='#3b82f6' size='25px'/><p className='opacity-50'> Audio chat</p></Link>
+                        <button onClick={handleVideo} className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BsCameraVideoFill color='#3b82f6' size='25px'/><p className='opacity-50'> Video Call</p></button>
+                        <button onClick={handleFile} className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BiTransferAlt color='#3b82f6' size='25px'/><p className='opacity-50'> File Transfer</p></button>
                         <button onClick={()=> setClosePopup(true)} className='p-2 px-4 md:px-6 whitespace-nowrap absolute border-2 bg-red-500 text-white scale-75 border-red-600 topppp backdrop-blur-xl text-xs centerh rounded-full -bottom-4'>Close connection</button>
                     </div>
                     <br/>
@@ -150,7 +150,7 @@ const Mode = ({ dc }) => {
                 </div>
                 <div className="absolute bottom-0 w-full">
                     <div className='w-full flex items-center justify-center gap-4'>
-                        <input value={message} onChange={(event) => setMessage(event.target.value)} type='text' className='outline-none bg-black/[.05] drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' placeholder='Type message'/>
+                        <input value={message} onChange={(event) => setMessage(event.target.value)} type='text' className='outline-none backhue drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' placeholder='Type message'/>
                         <div className='fixed bottom-[2.2rem] md:bottom-[2.6rem] flex gap-4 md:gap-6 right-[10%] lg:right-[28%] '>
                             <button onClick={()=>{setMediaPopup(true); }}><AiOutlinePlus size='22px'/></button>
                             <button onClick={handleMessage} type='submit'><AiOutlineSend size='22px'/></button>
