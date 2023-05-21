@@ -19,5 +19,5 @@ SPOT uses a secure and encrypted peer-to-peer connection. This means that this d
 <div> >
     <th><a href="https://github.com/devignx/spoted">Readme ↗︎</a> </th> 
     <br>>
-    <td><a href= "https://github.com/devignx/spoted/blob/main/idea.md">Idea Brief ↗︎</a></td>
+    <td><a href= "https://github.com/devignx/spoted/blob/master/idea.md">Idea Brief ↗︎</a></td>
 </div>
