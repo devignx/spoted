@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {BsCameraVideoFill,BsFillMicFill, BsChatSquareTextFill} from 'react-icons/bs'
+import {BsCameraVideoFill,BsFillMicFill} from 'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineSend } from 'react-icons/ai';
 import ChatPop from './Chatpop';
 import {IoMdNotifications} from 'react-icons/io'
-import {RiMessage3Fill} from'react-icons/ri';
 import useStore from "../store/store";
 import { BsSun, BsMoon } from 'react-icons/bs'
+import {BiTransferAlt} from 'react-icons/bi'
 
 const Mode = ({ dc }) => {
 
@@ -25,7 +25,7 @@ const Mode = ({ dc }) => {
                 setImsg(true)
             }
 
-            if(data.type === "goved"){
+            if(data.type === "govid"){
                 navigator('/private')
             }
 
@@ -39,9 +39,9 @@ const Mode = ({ dc }) => {
         navigator('/room')
     }
 
-    const handleVedeo = () => {
+    const handleVideo = () => {
         dc.send(JSON.stringify({
-            type: "goved"
+            type: "govid"
         }))
         navigator('/private')
     }
@@ -94,8 +94,8 @@ const Mode = ({ dc }) => {
                     </div>
                     <div className={`${ismsg ? 'hidden' : ''} anim flex flex-wrap gap-8`}>
                         <Link to = '/private' className='min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsFillMicFill color='#3b82f6' size='25px'/><p className='opacity-50'> Audio chat</p></Link>
-                        <div onClick={handleVedeo} className='min-w-[7rem] basis-1 grow flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsCameraVideoFill color='#3b82f6' size='25px'/><p className='opacity-50'> Video Call</p></div>
-                        <div onClick={handleFile} className='min-w-[7rem] basis-1 grow w-full flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsChatSquareTextFill color='#3b82f6' size='25px'/><p className='opacity-50'> Texting</p></div>
+                        <button onClick={handleVideo} className='min-w-[7rem] basis-1 grow flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BsCameraVideoFill color='#3b82f6' size='25px'/><p className='opacity-50'> Video Call</p></button>
+                        <button onClick={handleFile} className='min-w-[7rem] basis-1 grow w-full flex flex-col gap-3 justify-center items-center h-[7rem] shadow-xl hover:bg-white anim hover:text-black text-xs rounded-2xl backd m-auto uppercase font-semibold'><BiTransferAlt color='#3b82f6' size='25px'/><p className='opacity-50'> File Transfer</p></button>
                         <button onClick={close} className='p-2 px-4 md:px-6 whitespace-nowrap absolute border-2 bg-red-500 text-white scale-75 border-red-600 topppp backdrop-blur-xl text-xs centerh rounded-full -bottom-4'>Close connection</button>
                     </div>
                     <br/>

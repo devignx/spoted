@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Auth from './pages/Auth';
 import Settings from './pages/Settings';
@@ -9,7 +8,7 @@ import { GlobalStyles, darkTheme, lightTheme } from './Theme';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Why from './pages/Why';
-import Vedeo from './pages/Vedeo';
+import Video from './pages/Video';
 import Peer from './pages/Peer';
 import File from './pages/File';
 
@@ -27,7 +26,7 @@ function App() {
           <Route path='/room' element={<Room/>}/>
           <Route path='/chat' element={<Chat/>}/>
           <Route path='/why' element={<Why/>}/>
-          <Route path='/private' element={<Vedeo/>}/>
+          <Route path='/private' element={<Video/>}/>
           <Route path='/peer' element={<Peer/>}/>
           <Route path='/file' element={<File/>}/>
         </Routes>

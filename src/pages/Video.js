@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import connection from '../webrtc';
 import { useNavigate } from "react-router-dom";
 
-const Vedeo = () => {
+const Video = () => {
 
     const navigate = useNavigate()
 
@@ -25,7 +25,7 @@ const Vedeo = () => {
 
     useEffect(()=> {
         connection.permission(conn)
-    }, [])
+    }, [conn])
 
     return(
         <div className="relative w-full h-screen p-2">
@@ -38,4 +38,4 @@ const Vedeo = () => {
     )
 }
 
-export default Vedeo;
+export default Video;

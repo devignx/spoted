@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store/store";
 import { BsPerson, BsChat } from "react-icons/bs";
-import { FiSettings } from 'react-icons/fi';
+// import { FiSettings } from 'react-icons/fi';
 import { Link } from "react-router-dom";
 import logo from '../assets/spotlogo.svg'   
 import { BsSun, BsMoon } from 'react-icons/bs'
@@ -11,7 +11,7 @@ import {RxCross2} from 'react-icons/rx'
 import {BiCheck} from 'react-icons/bi'
 import ShareMenu from "../components/ShareMenu";
 import {GiSadCrab} from 'react-icons/gi'
-import Mode from "../components/Mode";
+// import Mode from "../components/Mode";
 import Load from "../components/Load";
 
 const Room = () => {
@@ -47,8 +47,12 @@ const Room = () => {
             socket.send(JSON.stringify(payload))
             setLoged(true)
         }
-    },[])
+        if ( requests.length !== 0){
+            setRequestPop(true);
+        }
+    },[ip, loged, name,navigate,requests.length, setLoged, socket])
 
+    const [requestPop, setRequestPop] = useState(false);
     const handleAccept = (peer) => {
         setPeerid(peer.uid)
         setSender(false)
@@ -127,9 +131,30 @@ const Room = () => {
 
     return(
         <div className="relative w-full backd h-screen">
+            <div className="">
+            {
+            requests.length !== 0 &&
+            requests.map((peer, index)=> <div key={index} className={`w-11/12 toppp md:w-1/2 mt-8 absolute anim ${requestPop ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-50 scale-y-0 -translate-y-full'} centerh shadow-xl`}>
+                <div className="anim m-auto px-6 md:px-8 p-6 backhue font-semibold border-2 border-blue-500 rounded-lg mb-2 flex items-center justify-between w-full gap-4">
+                    <div className="flex gap-3 items-center ">
+                        <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
+                        <h1>{peer.name}</h1>
+                    </div>
+                    <div className="flex gap-4 md:gap-7">
+                        <div onClick={()=> handleAccept(peer)} className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
+                            <button onClick={()=>setRequestPop(false)} className="pclg">Accept</button><BiCheck/>
+                        </div>
+                        <div onClick={()=> handleDeny(peer)} className="text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">
+                            <button onClick={()=>setRequestPop(false)} className="pclg">Deny</button><RxCross2/>
+                        </div>
+                    </div>
+                </div>
+            </div>)
+            }
+            </div>
         <Link to='/' className="flex absolute top-24 left-4 pc gap-2 mt-4 transition-all duration-300 ease-in-out hover:bg-blue-500 hover:text-white rounded-full  items-center p-5 py-2">Go Home <AiOutlineHome/></Link>
             <div className="justify-between px-6 p-2 backhue flex items-center">
-                <img className="w-[6rem] mix-blend-difference" src={logo} />
+                <img className="w-[6rem] mix-blend-difference" alt="" src={logo} />
                 
                 <div className="flex gap-6 items-center">
                     {/* <Link to='/settings' className="p-4 right-6 md:right-12 m-auto absolute"><FiSettings size='20px'/></Link> */}
@@ -151,7 +176,7 @@ const Room = () => {
                 
             <div className="flex w-full md:w-1/2 items-center justify-center">
                     <button onClick={()=> setPeople(true)} className={`lg:text-lg p-2 w-full px-8 ${people? 'drop-shadow-xl z-[1]': "opacity-50"} transition-all duration-300 ease-in-out rounded-lg rounded-b-none rounded-tr-none pb-3 backhue`}>People ({peers.length})</button>
-                    <button onClick={()=> setPeople(false)} className={`lg:text-lg p-2 w-full px-8 ${people? 'opacity-50': "drop-shadow-xl z-[0]"} transition-all duration-300 ease-in-out rounded-lg rounded-tl-none rounded-b-none pb-3 backhue`}>Requests <span className={`${requests.length==0 ? "bg-none": "bg-red-600 text-xs"} rounded-full text-white p-[3px] px-[7px]`}>{requests.length > 0 && `${requests.length}`}</span></button>
+                    <button onClick={()=> setPeople(false)} className={`lg:text-lg p-2 w-full px-8 ${people? 'opacity-50': "drop-shadow-xl z-[0]"} transition-all duration-300 ease-in-out rounded-lg rounded-tl-none rounded-b-none pb-3 backhue`}>Requests <span className={`${requests.length===0 ? "bg-none": "bg-red-600 text-xs"} rounded-full text-white p-[3px] px-[7px]`}>{requests.length > 0 && `${requests.length}`}</span></button>
                 </div>
                 <div className="w-full z-[4] md:w-1/2 h-5/6 backhue rounded-lg rounded-t-none transition-all duration-300 ease-in-out p-4 overflow-scroll overflow-x-hidden">
                     {   
