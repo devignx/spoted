@@ -7,6 +7,6 @@ There are other issues like maximum connections per device, public wifi issues a
 <div> >
     <th><a href="https://github.com/devignx/spoted">Readme ↗︎   </a> </th>  
     <br> >
-    <td><a href= "https://github.com/devignx/spoted/blob/main/tech.md">Tech ↗︎</a></td>
+    <td><a href= "https://github.com/devignx/spoted/blob/master/tech.md">Tech ↗︎</a></td>
 </div>
 <br>
