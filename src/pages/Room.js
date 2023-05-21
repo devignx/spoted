@@ -4,7 +4,7 @@ import useStore from "../store/store";
 import { BsPerson, BsChat } from "react-icons/bs";
 // import { FiSettings } from 'react-icons/fi';
 import { Link } from "react-router-dom";
-import logo from '../assets/spotlogo.svg'   
+// import logo from '../assets/spotlogo.svg'   
 import { BsSun, BsMoon } from 'react-icons/bs'
 import { AiOutlineHome } from 'react-icons/ai';
 import {RxCross2} from 'react-icons/rx'
@@ -13,12 +13,15 @@ import ShareMenu from "../components/ShareMenu";
 import {GiSadCrab} from 'react-icons/gi'
 // import Mode from "../components/Mode";
 import Load from "../components/Load";
+import logob from '../assets/logo-b.svg'
+import logow from '../assets/logo-w.svg'
 
 const Room = () => {
 
     const [people, setPeople] = useState(true)
     const [load, setLoad] = useState(false)
     const [sender, setSender] = useState(false)
+    const [closePopup, setClosePopup] = useState(false);
 
     const handleButtonText = (bool) => {
         if(bool){
@@ -134,27 +137,48 @@ const Room = () => {
             <div className="">
             {
             requests.length !== 0 &&
-            requests.map((peer, index)=> <div key={index} className={`w-11/12 toppp md:w-1/2 mt-8 absolute anim ${requestPop ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-50 scale-y-0 -translate-y-full'} centerh shadow-xl`}>
+            requests.map((peer, index)=> <div key={index} className={`w-11/12 toppp md:w-1/2 mt-8 absolute anim ${requestPop ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 translate-y-full'} centerh shadow-xl`}>
                 <div className="anim m-auto px-6 md:px-8 p-6 backhue font-semibold border-2 border-blue-500 rounded-lg mb-2 flex items-center justify-between w-full gap-4">
                     <div className="flex gap-3 items-center ">
                         <BsPerson className="w-8 h-8 p-2 bg-white border-[1.5px] border-blue-500/50 rounded-full" color="#000" size={"30px"}/> 
                         <h1>{peer.name}</h1>
                     </div>
                     <div className="flex gap-4 md:gap-7">
-                        <div onClick={()=> handleAccept(peer)} className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
-                            <button onClick={()=>setRequestPop(false)} className="pclg">Accept</button><BiCheck/>
+                        <div onClick={()=> {handleAccept(peer); setRequestPop(false)}} className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
+                            <button className="pclg">Accept</button><BiCheck/>
                         </div>
-                        <div onClick={()=> handleDeny(peer)} className="text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">
-                            <button onClick={()=>setRequestPop(false)} className="pclg">Deny</button><RxCross2/>
+                        <div onClick={()=> {handleDeny(peer);setRequestPop(false)}} className="text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">
+                            <button className="pclg">Deny</button><RxCross2/>
                         </div>
                     </div>
                 </div>
             </div>)
             }
             </div>
-        <Link to='/' className="flex absolute top-24 left-4 pc gap-2 mt-4 transition-all duration-300 ease-in-out hover:bg-blue-500 hover:text-white rounded-full  items-center p-5 py-2">Go Home <AiOutlineHome/></Link>
+        <button onClick={()=>setClosePopup(true)} className="flex absolute top-24 left-4 pc gap-2 mt-4 transition-all duration-300 ease-in-out hover:bg-blue-500 hover:text-white rounded-full  items-center p-5 py-2">Go Home <AiOutlineHome/></button>
+        <div className={`${closePopup ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 translate-y-full scale'} anim fixed toppp top-0 left-0 h-screen w-screen flex justify-center backhue items-center`}>
+                
+                {
+                    theme=== 'light' ? 
+                    <img className="w-[6rem] absolute top-6 md:top-8" alt="" src={logob} />
+                    :
+                    <img className="w-[6rem] absolute top-6 md:top-8" alt="" src={logow} />
+                }
+
+            <div className="rounded-xl -mt-8">
+                <p>Are you Sure to Disconnect</p>
+                <Link to='/' className="flex gap-2 mt-6 transition-all duration-300 ease-in-out bg-blue-500 text-white rounded-full justify-center items-center p-5 py-2">Yes, Go Home <AiOutlineHome/></Link>
+                <button onClick={()=>setClosePopup(false)} className="mx-auto block mt-8 opacity-50">nvm, Go back</button>
+            </div>
+        </div>
             <div className="justify-between px-6 p-2 backhue flex items-center">
-                <img className="w-[6rem] mix-blend-difference" alt="" src={logo} />
+                
+            {
+                theme=== 'light' ? 
+                <img className="w-[6rem]" alt="" src={logob} />
+                :
+                <img className="w-[6rem]" alt="" src={logow} />
+            }
                 
                 <div className="flex gap-6 items-center">
                     {/* <Link to='/settings' className="p-4 right-6 md:right-12 m-auto absolute"><FiSettings size='20px'/></Link> */}

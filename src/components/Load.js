@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import connection from '../webrtc'
-import { useStore } from "zustand";
+// import { useStore } from "zustand";
 import { useNavigate } from "react-router-dom";
 
 const Load = ({sender, socket, id}) => {
@@ -31,7 +31,7 @@ const Load = ({sender, socket, id}) => {
                 error()
             }
         }
-    },[])
+    })
 
     socket.onmessage = (data) => {
         const response = JSON.parse(data.data)
@@ -75,7 +75,7 @@ const Load = ({sender, socket, id}) => {
     }
 
     return(
-        <div className="absolute top-0 w-full z-50 backhue">
+        <div className="absolute top-0 w-full topppp backhue">
             <div className="w-full h-screen flex flex-col gap-12 justify-center items-center">
                 <div className="lds-ripple block scale-150"></div>
                 <p className="opacity-70 mt-6 text-sm text-center">Hang on!</p>

@@ -6,9 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import openConnection from "../websocket";
 import axios from "axios";
 import useStore from "../store/store";
-import logo from '../assets/spotlogo.svg'
+// import logo from '../assets/spotlogo.svg'
+import logob from '../assets/logo-b.svg'
+import logow from '../assets/logo-w.svg'
 import { BsSun, BsMoon } from 'react-icons/bs'
-import BrowserChecker from "../components/BrowserChecker";
+// import BrowserChecker from "../components/BrowserChecker";
 
 const Auth = () => {
 
@@ -66,8 +68,10 @@ const Auth = () => {
             establishConnection();
         }
         else{
-            navigate('/room')
+            navigate('/');
+            window.location.reload();
         }
+        // eslint-disable-next-line
     }, [])
 
     return(
@@ -86,7 +90,12 @@ const Auth = () => {
                             }
                     </div>
                 </div>
-                <img className="w-[8rem] absolute top-4 mix-blend-difference" src={logo} />
+                {
+                    theme=== 'light' ? 
+                    <img className="w-[6rem] absolute top-4 md:top-8" alt="" src={logob} />
+                    :
+                    <img className="w-[6rem] absolute top-4 md:top-8" alt="" src={logow} />
+                }
                 <div className="w-11/12 lg:w-1/3 h-1/2 rounded-2xl">
                     <form className="w-full h-full flex items-center flex-col gap-6 justify-center">
                         <input required value={na} onChange={(event)=> setNa(event.target.value)}  name="name" autoComplete="true" className="w-3/4 p-3 px-4 md:p-4 text-lg backhue transition-all duration-300 ease-in-out focus:drop-shadow-xl rounded-lg outline-0" autoFocus placeholder="Enter your username"/>
@@ -103,12 +112,12 @@ const Auth = () => {
                 }
                 <h3 className="tracking-widest">FUN TIPS</h3>
                 <p className="mt-2 w-10/12 m-auto opacity-60">Use usernames that are funny to make chats funnier, like Naai Sekar, Pattaasu Balu, Maatu ravi etc..</p>
-            </div>    
+            </div>  
             <div className="m-auto flex flex-wrap w-full font-semibold justify-center items-center p-3 gap-4 mt-3">
-                    <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Project Details</a>
+                    <button className="p-2 px-4 rounded-lg text-sm uppercase">Project Details</button>
                     <Link to='/why' className="p-2 px-4 rounded-lg text-sm uppercase">About</Link>
-                    <a href="" className="p-2 px-4 rounded-lg text-sm uppercase">Developer Contact</a>
-                </div>
+                    <button className="p-2 px-4 rounded-lg text-sm uppercase">Developer Contact</button>
+            </div>
         </div>
     )
 }
