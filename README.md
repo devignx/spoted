@@ -1,6 +1,6 @@
 <div align ="center"><img src="https://user-images.githubusercontent.com/75234157/192102190-ed065862-4cdd-4fe3-b920-8f03b16ea405.png" alt="SP•T" width="130" ><br><br>
 
-SPOT is a web based offline chat platform connected over wifi or hotspot to share text and other generic data (offline & browser based) <br> [Idea Brief ↗︎](https://github.com/devignx/spoted/blob/main/idea.md) & [Tech ↗︎](https://github.com/devignx/spoted/blob/main/tech.md) <br></div>
+SPOT is a web based offline chat platform connected over wifi or hotspot to share text and other generic data (offline & browser based) <br> [Idea Brief ↗︎](https://github.com/devignx/spoted/blob/master/idea.md) & [Tech ↗︎](https://github.com/devignx/spoted/blob/master/tech.md) <br></div>
 
 
 ***
