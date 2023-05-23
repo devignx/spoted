@@ -4,7 +4,7 @@ import {IoCopy} from 'react-icons/io5'
 import { TiTick } from 'react-icons/ti';
 
 const ShareMenu = ({ url }) => {
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [copy, setCopy] = useState(false);
   const [copyText, setCopyText] = useState("Copy Link");
 

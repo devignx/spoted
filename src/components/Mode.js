@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {BsCameraVideoFill,BsFillMicFill} from 'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineSend,AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineSend } from 'react-icons/ai';
 import ChatPop from './Chatpop';
 import {IoMdNotifications} from 'react-icons/io'
 import useStore from "../store/store";
@@ -11,6 +11,7 @@ import logob from '../assets/logo-b.svg'
 import logow from '../assets/logo-w.svg'
 import { RiHome3Fill } from 'react-icons/ri';
 import {IoMdPeople} from 'react-icons/io'
+import FileInput from './FileInput';
 
 const Mode = ({ dc }) => {
 
@@ -20,7 +21,6 @@ const Mode = ({ dc }) => {
     const [message, setMessage] = useState("")
     const [msg, setMsg] = useState("")
     const [ismsg, setImsg] = useState(false)
-    const [mediaPopup, setMediaPopup] = useState(false)
     const [closePopup, setClosePopup] = useState(false);
 
     dc.onmessage = e => {
@@ -71,16 +71,6 @@ const Mode = ({ dc }) => {
     const close = () => {
         dc.close()
     }
-
-    const fileInputRef = useRef(null);
-
-    const handleAddButtonClick = () => {
-        fileInputRef.current.click();
-    };
-
-    const handleFileSelected = (e) => {
-        // const selectedFile = e.target.files[0];
-    };
 
     return (
         <div id='popup' className='anim z-[99999]'> 
@@ -152,31 +142,12 @@ const Mode = ({ dc }) => {
                     <div className='w-full flex items-center justify-center gap-4'>
                         <input value={message} onChange={(event) => setMessage(event.target.value)} type='text' className='outline-none backhue drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' placeholder='Type message'/>
                         <div className='fixed bottom-[2.2rem] md:bottom-[2.6rem] flex gap-4 md:gap-6 right-[10%] lg:right-[28%] '>
-                            <button onClick={()=>{setMediaPopup(true); }}><AiOutlinePlus size='22px'/></button>
+                            {/* <button onClick={()=>{setMediaPopup(true); }}><AiOutlinePlus size='22px'/></button> */}
+                            <FileInput/>
                             <button onClick={handleMessage} type='submit'><AiOutlineSend size='22px'/></button>
                         </div>
                     </div>
                 </div>
-                {
-                    mediaPopup && 
-                    <div className='p-8 top-0 fixed anim w-screen h-screen flex toppp justify-center items-center mx-auto  backdrop-blur-xl'>
-                        <div className='w-11/12 relative md:w-1/2 topppp py-16 -mt-12 rounded-xl backd p-8 text-center shadow-xl'>
-                            <p>Choose Files / drag & drop here</p>
-                            <input
-                                type="file"
-                                className='mt-8 bg-white p-4 px-8'
-                                style={{ display: 'none' }}
-                                id='img'
-                                ref={fileInputRef}
-                                accept="image/png, image/jpeg, image/webp, image/heic, image/jpg"
-                                onChange={handleFileSelected}
-                            />
-                            <button className='mt-8 flex items-center justify-center gap-2 mx-auto rounded-xl backhue bg-white p-4 px-8' onClick={handleAddButtonClick}>Add <button><AiOutlinePlus className='text-blue-500' size='22px'/></button></button>
-                            <button onClick={()=>{setMediaPopup(false)}} className='mt-6 text-xs p-2 px-3 rounded-full absolute topppp -top-10 centerh text-white bg-red-500/50  border-2 border-red-500' >X</button>
-                        </div>
-                        <div onClick={()=> setMediaPopup(false)} className='w-screen cursor-context-menu h-screen toppp absolute' ></div>
-                    </div>
-                }
 
             </div>
         </div>
