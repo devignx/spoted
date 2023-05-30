@@ -42,6 +42,7 @@ const Mode = ({ dc }) => {
     };
 
     dc.onclose = e => {
+        console.log('fucked')
         navigator('/room')
     }
 

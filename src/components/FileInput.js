@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
+import connection from '../webrtc'
 
 import useStore from "../store/store";
 
 const FileInput = () => {
+
+  const dc = connection.getDc()
+
   const [dragging, setDragging] = useState(false);
   const [fileDrop, setFileDrop] = useState(false);
   const { theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
@@ -17,9 +21,36 @@ const FileInput = () => {
 
   const handleFileSelected = (e) => {
       // const selectedFile = e.target.files[0];
-      console.log('Selected image files:',e.target.files[0]);
+      const file = e.target.files[0]
+      console.log(file.name)
       setFileDrop(true);
-  };
+      const chunkSize = 16384; // 16KB
+      let offset = 0;
+      console.log('hai')
+
+      const reader = new FileReader();
+      reader.onload = function() {
+        if (offset >= file.size) {
+          // File transfer complete
+          dc.send('EOF');
+          console.log('File transfer complete');
+          return;
+        }
+
+        // Send the next chunk of data
+        dc.send(reader.result);
+        offset += chunkSize;
+        readSlice(offset);
+      };
+
+      function readSlice(offset) {
+        const slice = file.slice(offset, offset + chunkSize);
+        reader.readAsArrayBuffer(slice);
+      }
+
+      // Start reading the file
+      readSlice(offset);
+    };
 
   useEffect(() => {
     const handleDragEnter = (e) => {
@@ -38,10 +69,12 @@ const FileInput = () => {
     const handleDrop = (e) => {
       e.preventDefault();
       setFileDrop(true);
+      console.log('hello')
       setDragging(false);
       const files = Array.from(e.dataTransfer.files);
       const imageFiles = files.filter((file) => file.type.startsWith('image/'));
       console.log('Dropped image files:', imageFiles);
+      console.log(imageFiles.name)
       // Perform your logic with the dropped image files here
     };
 
