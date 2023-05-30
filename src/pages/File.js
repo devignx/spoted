@@ -47,14 +47,13 @@ const File = () => {
         })
     }
 
-    dc.onmessage = async e => {
+    dc.onmessage = e => {
         const data = JSON.parse(e.data)
         console.log(e.data)
         if(data){
             if(data.type === "meta"){
                 const temp = files
-                const file = await base64ToFile(data.data, data.name)
-                console.log(file)
+                temp.push(data)
                 setFiles([...temp])
             }
 
