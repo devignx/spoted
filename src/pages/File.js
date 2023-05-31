@@ -39,12 +39,10 @@ const File = () => {
 
     function sendFile(file) {
         const chunkSize = 16384;
-        // Read the file as an ArrayBuffer
         const reader = new FileReader();
         reader.onload = (event) => {
           const fileData = event.target.result;
           let offset = 0;
-          // Send the file data through the data channel
           function sendChunk() {
             const chunk = fileData.slice(offset, offset + chunkSize);
             if (chunk.byteLength === 0) {
@@ -54,7 +52,7 @@ const File = () => {
             }
             dc.send(chunk);
             offset += chunkSize;
-            setTimeout(sendChunk, 100); // Delay between sending chunks (optional)
+            setTimeout(sendChunk, 100);
           }
           sendChunk()
         };
