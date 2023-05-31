@@ -23,7 +23,7 @@ const Auth = () => {
     const navigate = useNavigate()
     const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
-    const { setSocket, socket, setIp, setName } = useStore((state) => ({setSocket: state.setSocket, socket: state.socket, ip: state.ip, setIp: state.setIp, setName: state.setName}))
+    const { setSocket, socket, setIp, setName, setDisip } = useStore((state) => ({setSocket: state.setSocket, socket: state.socket, ip: state.ip, setIp: state.setIp, setName: state.setName, setDisip: state.setDisip}))
 
     const establishConnection = () => {
         setError(false)
@@ -38,6 +38,7 @@ const Auth = () => {
                         setLoad(false)
                     }, 3000)
                     const arr = res.data.ip.split('.')
+                    setDisip(res.data.ip)
                     setIp(`${arr[0]}.${arr[1]}`)
                     setSocket(sock)
                     setDisabled(false)

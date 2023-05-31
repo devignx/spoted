@@ -35,7 +35,7 @@ const Room = () => {
     const navigate = useNavigate();
     const { changeTheme, theme } = useStore((state) => ({changeTheme: state.changeTheme, theme: state.theme}))
 
-    const { peerid, setPeerid, socket, name, ip, setPeers, peers, loged, setLoged, messages, setMessages, setRequests, requests } = useStore((state) => ({peerid: state.peerid, setPeerid: state.setPeerid, socket: state.socket, name: state.name, ip: state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages, requests: state.requests, setRequests: state.setRequests}))
+    const { peerid, setPeerid, socket, name, disIp, ip, setPeers, peers, loged, setLoged, messages, setMessages, setRequests, requests } = useStore((state) => ({peerid: state.peerid, setPeerid: state.setPeerid, socket: state.socket, name: state.name, disIp: state.disIp, ip:state.ip, setPeers: state.setPeers, peers: state.peers, loged: state.loged, setLoged: state.setLoged, messages: state.messages, setMessages: state.setMessages, requests: state.requests, setRequests: state.setRequests}))
 
     useEffect(()=> {
         if(socket === null){
@@ -254,7 +254,7 @@ const Room = () => {
             </div>
             <abbr title="Your Public IP Adress" className=" absolute backd z-[9999]  p-2 rounded centerh bottom-4 flex justify-start gap-4">
                     <h1 className="text-sm shrink-0 uppercase">{name}</h1>
-                    <h1 className="text-sm text-blue-500">{ip}</h1>
+                    <h1 className="text-sm text-blue-500">{disIp}</h1>
             </abbr>
             {
                 load && <Load sender={sender} socket={socket} id={peerid}/>

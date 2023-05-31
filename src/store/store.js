@@ -10,6 +10,8 @@ const useStore = create((set) => ({
     messages: [],
     requests: [],
     peerid: null,
+    disIp:null,
+    setDisip : (disIp) => set(()=> ({disIp})),
     setPeerid: (peerid) => set(()=> ({peerid})),
     setRequests: (requests) => set(()=> ({requests})),
     setMessages: (messages) => set(()=> ({messages})),
