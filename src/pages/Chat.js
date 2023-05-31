@@ -122,7 +122,7 @@ const Chat = () => {
                         </div>
                         <form className='relative m-auto' onSubmit={handleSubmit}>
                             <input onChange={(event)=> setMess(event.target.value)} value={mess} className='outline-none bg-black/[.05] drop-shadow-xl m-auto text-lg fixed w-[94%] lg:w-[48%] mb-5 border-solid border-[1px] border-white/30 backdrop-blur-xl rounded-full bottom-0 px-5 py-3 md:py-4 ' type="text" placeholder='Ask here'></input>
-                            <AiOutlineSend className="fixed bottom-[2.5rem] lg:bottom-[2.7rem] right-[10%] lg:right-[28%] scale-[150%]"/> 
+                            <AiOutlineSend onClick={handleSubmit} className="fixed cursor-pointer bottom-[2.5rem] lg:bottom-[2.7rem] right-[10%] lg:right-[28%] scale-[150%]"/> 
                         </form>
                     </div>
                 </div>
