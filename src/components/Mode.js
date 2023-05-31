@@ -103,7 +103,7 @@ const Mode = ({ dc }) => {
         </div>
 
             <div className='relative backd '>
-                <p className=' font-semibold text-center  text-sm mt-6 md:mt-16'>SPOT P2P Chat</p>
+                    {/* <p className=' font-semibold text-center  text-sm mt-6 md:mt-16'>SPOT P2P Chat</p> */}
                 <div className='p-12 anim mx-auto mt-4 md:mt-12 mb-36 text-center w-full md:w-1/2 rounded-lg backhue relative drop-shadow-xl'>
                     <div className='rale relative mx-auto w-fit'>
                         { ismsg ? 
@@ -119,9 +119,9 @@ const Mode = ({ dc }) => {
                         ''}
                     </div>
                     <div className={`${ismsg ? 'hidden' : ''} anim flex flex-wrap gap-8`}>
-                        <Link to = '/private' className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BsFillMicFill color='#3b82f6' size='25px'/><p className='opacity-50'> Audio chat</p></Link>
-                        <button onClick={handleVideo} className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BsCameraVideoFill color='#3b82f6' size='25px'/><p className='opacity-50'> Video Call</p></button>
-                        <button onClick={handleFile} className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BiTransferAlt color='#3b82f6' size='25px'/><p className='opacity-50'> File Transfer</p></button>
+                        {/* <Link to = '/private' className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BsFillMicFill color='#3b82f6' size='25px'/><p className='opacity-50'> Audio chat</p></Link>
+                        <button onClick={handleVideo} className={`min-w-[7rem] grow  basis-1  flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BsCameraVideoFill color='#3b82f6' size='25px'/><p className='opacity-50'> Video Call</p></button> */}
+                        <button onClick={handleFile} className={`w-[10rem] flex flex-col gap-3 justify-center items-center h-[7rem]  anim text-xs rounded-2xl border-2 ${theme === 'light' ? 'border-blue-500/30 ' : 'backd border-blue-500/0' } hover:border-blue-500 m-auto uppercase font-semibold`}><BiTransferAlt color='#3b82f6' size='25px'/><p className='opacity-50'> File Transfer</p></button>
                         <button onClick={()=> setClosePopup(true)} className='p-2 px-4 md:px-6 whitespace-nowrap absolute border-2 bg-red-500 text-white scale-75 border-red-600 topppp backdrop-blur-xl text-xs centerh rounded-full -bottom-4'>Close connection</button>
                     </div>
                     <br/>

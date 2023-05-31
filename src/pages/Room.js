@@ -136,7 +136,7 @@ const Room = () => {
         <div className="relative w-full backd h-screen">
             <div className="">
             {
-            requests.length !== 0 &&
+            requests.length !== 0 && 
             requests.map((peer, index)=> <div key={index} className={`w-11/12 toppp md:w-1/2 mt-8 absolute anim ${requestPop ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 translate-y-full'} centerh shadow-xl`}>
                 <div className="anim m-auto px-6 md:px-8 p-6 backhue font-semibold border-2 border-blue-500 rounded-lg mb-2 flex items-center justify-between w-full gap-4">
                     <div className="flex gap-3 items-center ">
@@ -144,10 +144,10 @@ const Room = () => {
                         <h1>{peer.name}</h1>
                     </div>
                     <div className="flex gap-4 md:gap-7">
-                        <div onClick={()=> {handleAccept(peer); setRequestPop(false)}} className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
+                        <div onClick={()=> {handleAccept(peer); setRequestPop(false);}} className="text-white font-thin cursor-pointer p-2 px-5 bg-blue-500 rounded-lg flex gap-2 items-center justify-center">
                             <button className="pclg">Accept</button><BiCheck/>
                         </div>
-                        <div onClick={()=> {handleDeny(peer);setRequestPop(false)}} className="text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">
+                        <div onClick={()=> {handleDeny(peer);setRequestPop(false);}} className="text-white font-thin text-sm cursor-pointer gap-2 p-2 px-5 bg-red-500 rounded-lg flex items-center justify-center">
                             <button className="pclg">Deny</button><RxCross2/>
                         </div>
                     </div>
@@ -192,7 +192,7 @@ const Room = () => {
                     </div>
                     <Link to='/chat' className=" rounded-lg shrink-0 text-white p-3 px-6 bg-blue-500 flex items-center justify-center gap-2">
                         <BsChat size={'20px'}/>
-                        <h1>Live Chat</h1>
+                        <h1>Group Chat</h1>
                     </Link>
                 </div>
             </div>

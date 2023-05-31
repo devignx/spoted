@@ -115,9 +115,9 @@ const Auth = () => {
                 <p className="mt-2 w-10/12 m-auto opacity-60">Use usernames that are funny to make chats funnier, like Naai Sekar, Pattaasu Balu, Maatu ravi etc..</p>
             </div>  
             <div className="m-auto flex flex-wrap w-full font-semibold justify-center items-center p-3 gap-4 mt-3">
-                    <button className="p-2 px-4 rounded-lg text-sm uppercase">Project Details</button>
-                    <Link to='/why' className="p-2 px-4 rounded-lg text-sm uppercase">About</Link>
-                    <button className="p-2 px-4 rounded-lg text-sm uppercase">Developer Contact</button>
+                    <a href="https://github.com/devignx/spoted" target="_blank" rel="noreferrer" className="p-2 px-4 rounded-lg text-sm uppercase">Source Code</a>
+                    {/* <Link to='/why' className="p-2 px-4 rounded-lg text-sm uppercase">About</Link> */}
+                    <a href="mailto:devignx@gmail.com" target="_blank" rel="noreferrer" className="p-2 px-4 rounded-lg text-sm uppercase">Developer Contact</a>
             </div>
         </div>
     )
