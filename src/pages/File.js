@@ -76,6 +76,7 @@ const File = () => {
         if(e.data === 'EOF'){
             console.log('file recieved successfully')
             let data = storedArrayBuffer.splice(0,1)
+            console.log(storedArrayBuffer)
             data = JSON.parse(data[0])
             console.log(data)
             const merged = mergeArrayBuffers()
