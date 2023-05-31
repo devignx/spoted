@@ -82,6 +82,7 @@ const File = () => {
             const merged = mergeArrayBuffers()
             const blob = convertArrayBufferToBlob(data.type, merged)
             saveBlob(blob, data.name)
+            storedArrayBuffer = []
         }
         else{
             console.log(e.data)
